@@ -15,53 +15,38 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	private List<User> users;
 	
-	@Override
-	public User findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void saveUser(User user) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updateUser(User user) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteUserById(long id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public List<User> findAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<User>) userRepository.findAll();
+	}
+	
+	public User findById(long id) {
+		return userRepository.findOne(id);
+	}
+	
+	public User findByName(String name) {
+		return userRepository.findByUsername(name);
+	}
+	
+	public void saveUser(User user) {
+		userRepository.save(user);
 	}
 
-	@Override
-	public void deleteAllUsers() {
-		// TODO Auto-generated method stub
-
+	public void updateUser(User user) {
+		userRepository.save(user);
 	}
 
-	@Override
+	public void deleteUserById(long id) {
+		userRepository.delete(id);
+	
+	}
+
 	public boolean isUserExist(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		return findByName(user.getUsername())!=null;
 	}
-
+	
+	public void deleteAllUsers(){
+		userRepository.deleteAll();
+	}
 }
